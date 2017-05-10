@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../views/head %>
+</head>
+<body>
+    <% include ../views/nav %>
+<div class="container home home-welcome">
+  <div class="jumbotron">
+    <h1>유저명</h1>
+    <ul>
+        <% Proj_menu.forEach(function(Proj_menu) { %> <!-- 3 -->
+      <li>
+          <a href="/proj/Proj_view/<%= Proj_menu.id %>"> <%= Proj_menu.project_name %></a>
+      </li>
+        <% }) %>
+    </ul>
+    <ul>
+      <li><a href="/new">프로젝트 생성</a> </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

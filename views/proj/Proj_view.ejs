@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../proj/head.ejs%>
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+
+<!-- Modal Frame -->
+<div class="modal fade" tabindex="-1" role="dialog" id="_modal-row-insert">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Insert Row</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group col-xs-12 _insert-cols" style="margin-bottom: 10px;">
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary _btn-row-insert" id="_btn-row-insert">Insert Row</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="_close-modal" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- Modal Frame -->
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="SessionDBAdmin.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>SDB</b>a</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>SessionDB</b>Admin</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =============================================== -->
+
+  <!-- Left side column. contains the sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">Select Storage Type</li>
+        <select id="_tblType" class="form-control" role="form">
+          <option value="session">sessionStorage</option>
+          <option value="local">localStorage</option>
+        </select>
+        <li class="active _dashboard">
+          <a href="#" id="_dashboard">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="treeview _tables">
+          <a href="#" id="_tables">
+            <i class="fa fa-table"></i> <span>Tables</span>
+            <span class="pull-right-container">
+              <span class="label label-success pull-right _cnt-main-tbl"></span>
+            </span>
+          </a>
+          <ul class="treeview-menu _tbl-list">
+            <!--
+            <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+            <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+            -->
+          </ul>
+        </li>
+        <li>
+          <button type="button" class="list-group-item btn-element" id="_btn-go-create-table" style="width: 100%">Create Table</button>
+        </li>
+        <li class="header">테스트 페아지 이동</li>
+        <li>
+          <input type="text" class="form-control" name="_move-url" id="_move-url" value="" placeholder="페이지 URL 입력">
+          <button type="button" class="list-group-item btn-element" id="_btn-go-import-data" style="width: 100%">Go</button>
+        </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- =============================================== -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper _wrapper1">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        SessionDBAdmin Dashboard
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Layout</a></li>
+        <li class="active">Fixed</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="callout callout-success">
+        <h4>Introduce</h4>
+
+        <p>SessionDB는 WebStorage의 두 객체인 sessionStorage와 localStorage를 간단한 DB처럼 활용 가능하도록 만든 임시 도구입니다. SessionDB는 프로젝시 시작시 신속하게 Prototype을 만들어<br>전체 시스템의 흐름을 확인해보거나 프로젝트 초 네트워크 환경등이 갖추어지지 않은 상태에서 초기 작업을 진행하는 경우 간단히 사용할 수 있습니다.
+          <br>테이블과 데이터 생성 후 세션을 유지하면서 테스트 하기 위해서는 좌측 메뉴 하단의 '테스트 페이지 이동'영역에 페이지 URL을 입력한 후 Go버튼을 클릭하면 같은 윈도우
+          내에서 해당 페이지로 쉽게 이동하실 수 있습니다.
+          <br><br>
+          <strong>제작 : <a href="http://mazdah.tistory.com">mazdah</a>, 화면 디자인 : <a href="https://almsaeedstudio.com">AdminLTE</a>, source code : GitHub</strong>
+        </p>
+      </div>
+      <div class="callout callout-info">
+        <h4>Tip!</h4>
+
+        <p>SessionDB의 전체 상황을 확인하는 화면입니다. sessionStorage와 localStorage에 생성된 테이블의 수와 이름 그리고 각 테이블에 생성된 row 수를 확인할 수 있습니다.</p>
+      </div>
+      <!-- Default box -->
+      <div class="container">
+        <div class="col-sm-6" style="display: inline-block;">
+          <div class="bg-success with-border" style="vertical-align: middle">
+            <span style="font-size: 26px">sessionStorage Table List</span>
+            <span class="pull-right" style="display: inline-block; margin-top: 10px; margin-right: 10px;">
+              <small class="label pull-right bg-green _cnt-session-table"></small>
+            </span>
+          </div>
+          <div class="box-body _session-tables">
+            <ul class="list-group _group-session-table">
+            </ul>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <div class="col-sm-6" style="display: inline-block;">
+          <div class="bg-warning with-border" style="vertical-align: middle">
+            <span style="font-size: 26px">localStorage Table list</span>
+            <span class="pull-right" style="display: inline-block; margin-top: 10px; margin-right: 10px;">
+              <small class="label pull-right bg-orange _cnt-local-table"></small>
+            </span>
+          </div>
+          <div class="box-body _local-tables">
+            <ul class="list-group _group-local-table">
+            </ul>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Content Wrapper. Contains page content2 -->
+  <div class="content-wrapper _wrapper2">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Create table
+        <small>테이블 이름을 입력하여 새로운 테이블을 생성</small>
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="callout callout-warning">
+        <h4>Tip!</h4>
+
+        <p>좌측 메인 메뉴에서 Select Storage Type(sessionStorage를 사용할 것인지 localStorage를 사용할 것인지)을 선택한 후
+          <br>
+          입력 폼에 테이블 이름을 입력한 후 Create Table 버튼을 클릭하면 해당 Web storage에 입력한 이름의 테이블이 생성됩니다.
+          <br>
+          이렇게 생성된 테이블은 좌측 Tables 메뉴에 메뉴 목록으로 표시되며 이 메뉴 목록에서 테이블 이름을 선택하면 해당 테이를에
+          <br>
+          테이터를 입력하거나 조회/수정/삭제 등의 작업 및 전체 데이터를 JSON 포맷으로 Export 하거나 JSON 포맷의 문자열을 테이블에
+          <br>
+          Import 하는 것이 가능합니다.</p>
+      </div>
+      <!-- Default box -->
+      <!--
+      <div class="form-inline">
+        <div class="form-group col-xs-4">
+          <div class="col-xs-6">
+            <input type="text" id="_tblNm" class="form-control" role="form" value="" placeholder="Input Table Name">
+          </div>
+          <div class="col-xs-2">
+            <button type="button" class="btn btn-primary" id="_btn-create-table">Create Table</button>
+          </div>
+        <div>
+      </div>
+      -->
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" id="_tblNm" class="form-control" role="form" value="" placeholder="Input Table Name">
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="_btn-create-table">Create Table</button>
+      </form>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Content Wrapper. Contains page content3 -->
+  <div class="content-wrapper _wrapper3">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        <span class="_lbl-tblNm"></span>
+        <small>테이블 정보를 확인하는 화면입니다.</small>
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="callout callout-danger">
+        <h4>Tip!</h4>
+
+        <p>선택한 테이블의 상세 작업을 진행하는 곳입니다.</p>
+        <p>기본적으로 현재 테이블에 저장된 테이터 목록이 표시되며 다음과 같은 작업을 할 수 있습니다.</p>
+        <ul>
+          <li>
+            Insert Row 버튼을 클릭하여 데이터를 입력할 수 있습니다. SessionDB는 JSON 형식을 이용하는 간이 DB로
+            scheme가 없는 DB입니다. 때문에 최초에 데이터를 입력할 때에는 JSON 포맷의 문자열로 입력을 해야 합니다.
+            하지만 일단 데이터가 들어가면 이미 들어간 데이터의 key를 scheme로 활용하여 각 컬럼별로 값을 입력하여
+            데이터를 입력할 수 있습니다.
+          </li>
+          <li>
+            각 row별로 데이터를 삭제하거나 수정할 수 있습니다. 데이터를 수정하거나 삭제하는 경우 _id 키를 기준으로
+            작업을 하게 됩니다. _id는 데이터를 입력할때 일련번호로 부여되며 primary key 역할을 하기 때문에 수정하거나
+            삭제할 수 없습니다.
+          </li>
+          <li>
+            Export Table 버튼을 클릭하면 하단의 Textarea 영역에 전체 테이블이 JSON 포맷으로 표시됩니다.
+            이 값을 복사하여 다른 영역이나 다른 PC의 SessionDB쪽에 Import 할 수 있습니다.
+          </li>
+          <li>
+            하단 Textarea 영역에 올바른 포맷의 JSON 문자열을 입력한 후 Import Table 버튼을 누르면 JSON 문자열의
+            내용이 row로 추가됩니다. 이 때 '추가하기'옵션을 선택하면 기존 데이터에 새 데이터가 추가되며, 대체하기를
+            선택하면 기존 데이터는 삭제되고 새 데이터만 입력됩니다.
+          </li>
+          <li>
+            Drop Table 버튼을 클릭하면 각 Web Storage로부터 해당 테이블 이름으로 생성된 객체가 삭제됩니다.
+            따라서 해당 테이블에 있는 모든 데이터가 삭제되며 다시 복구할 수 없습니다.
+          </li>
+        </ul>
+      </div>
+      <!-- Default container -->
+      <div class="container">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#_modal-row-insert" id="_btn-go-row-insert">
+          Insert Row
+        </button>
+        <table class="table table-bordered table-hover table-striped">
+          <thead class="_tbl-head">
+          </thead>
+          <tbody class="_tbl-body">
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-success" id="_btn-tbl-export">Export Table</button><button type="button" class="btn btn-warning" id="_btn-tbl-import">Import Table</button>
+        <div class="btn-group" id="_mode-group">
+          <label><input type="radio" name="optradio" id="_mode" value="add" checked="checked">추가하기</label>
+          <label><input type="radio" name="optradio" id="_mode" value="replace">대체하기</label>
+        </div>
+        <button type="button" class="btn btn-danger" id="_btn-tbl-drop">Drop Table</button>
+        <p></p>
+        <textarea class="form-control" id="_query-area" rows="5"></textarea>
+      </div>
+      <!-- /.box -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <!-- =============================================== -->
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 0.9.0
+    </div>
+    <strong>SessionDB</strong>Admin Made by <strong><a href="http://http://mazdah.tistory.com">Mazdah</a>.</strong> at 2016.11.11
+  </footer>
+  <!-- =============================================== -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-user bg-yellow"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                <p>New phone +1(800)555-1234</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                <p>nora@example.com</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                <p>Execution time 5 seconds</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="label label-danger pull-right">70%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Update Resume
+                <span class="label label-success pull-right">95%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Laravel Integration
+                <span class="label label-warning pull-right">50%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Back End Framework
+                <span class="label label-primary pull-right">68%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Allow mail redirect
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Other sets of options are available
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Expose author name in posts
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Allow the user to show his name in blog posts
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Delete chat history
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+            </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+
+
+  <script src="/js/jquery-3.1.1.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="/js/bootstrap.js"></script>
+  <!-- SlimScroll -->
+  <script src="/js/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script src="/js/fastclick.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/js/app.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/js/demo.js"></script>
+  <script src="/js/cmsessiondb.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+
+</html>
