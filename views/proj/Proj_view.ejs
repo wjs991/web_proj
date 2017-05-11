@@ -36,9 +36,17 @@
     <!-- Logo -->
     <a href="SessionDBAdmin.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>SDB</b>a</span>
+      <<% Proj_menu.forEach(function(Proj_menu) { %>
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini">
+          <b>SDB</b>a
+        </span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>SessionDB</b>Admin</span>
+      <span class="logo-lg">
+        <b><%= Proj_menu.project_name %></b>
+      </span>
+
+        <% }) %>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
