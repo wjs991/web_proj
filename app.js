@@ -38,11 +38,4 @@ db.once('open', function(){
 
 app.use("/",proj);
 
-
-
-
-app.listen(30000, function () {
-    console.log("server on!");
-});
-
 module.exports = app;
