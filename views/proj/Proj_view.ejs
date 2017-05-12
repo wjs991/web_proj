@@ -32,88 +32,12 @@
 <!-- Site wrapper -->
 <div class="wrapper">
 
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="SessionDBAdmin.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <<% Proj_menu.forEach(function(Proj_menu) { %>
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">
-          <b>SDB</b>a
-        </span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">
-        <!--<b></b>-->
-      </span>
-
-        <% }) %>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+  <% include ../proj/main-header.ejs%>
 
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header">Select Storage Type</li>
-        <select id="_tblType" class="form-control" role="form">
-          <option value="session">sessionStorage</option>
-          <option value="local">localStorage</option>
-        </select>
-        <li class="active _dashboard">
-          <a href="#" id="_dashboard">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="treeview _tables">
-          <a href="#" id="_tables">
-            <i class="fa fa-table"></i> <span>Tables</span>
-            <span class="pull-right-container">
-              <span class="label label-success pull-right _cnt-main-tbl"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu _tbl-list">
-            <!--
-            <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-            -->
-          </ul>
-        </li>
-        <li>
-          <button type="button" class="list-group-item btn-element" id="_btn-go-create-table" style="width: 100%">Create Table</button>
-        </li>
-        <li class="header">테스트 페아지 이동</li>
-        <li>
-          <input type="text" class="form-control" name="_move-url" id="_move-url" value="" placeholder="페이지 URL 입력">
-          <button type="button" class="list-group-item btn-element" id="_btn-go-import-data" style="width: 100%">Go</button>
-        </li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+  <% include ../proj/main-sidebar.ejs%>
 
   <!-- =============================================== -->
 
@@ -122,9 +46,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        SessionDBAdmin Dashboard
+          <% Proj_menu.forEach(function(Proj_menu) { %>
+         <b><%= Proj_menu.project_name %>관련 정보 나열</b>
+          <% }) %>
       </h1>
-      <ol class="breadcrumb">
+      <ol class="breadcrumb">  <!-- 홈>인덱스>db를 가르킴 -->
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Layout</a></li>
         <li class="active">Fixed</li>
@@ -513,19 +439,23 @@
 </div>
 
 
-  <script src="/js/jquery-3.1.1.js"></script>
+  <script src="/public/js/jquery-3.1.1.js"></script>
   <!-- Bootstrap 3.3.6 -->
-  <script src="/js/bootstrap.js"></script>
+  <script src="/public/js/bootstrap.js"></script>
   <!-- SlimScroll -->
-  <script src="/js/jquery.slimscroll.min.js"></script>
+  <script src="/public/js/jquery.slimscroll.min.js"></script>
   <!-- FastClick -->
-  <script src="/js/fastclick.min.js"></script>
+  <script src="/public/js/fastclick.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="/js/app.min.js"></script>
+  <script src="/public/js/app.min.js"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="/js/demo.js"></script>
-  <script src="/js/cmsessiondb.js"></script>
-  <script src="/js/admin.js"></script>
+  <script src="/public/js/demo.js"></script>
+  <script src="/public/js/cmsessiondb.js"></script>
+  <script src="/public/js/admin.js"></script>
+
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div>
 </body>
 
 </html>

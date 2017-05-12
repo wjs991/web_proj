@@ -23,10 +23,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());//bodyparser 로 stream의 폼 데이터를 req.body에 옮김, jsondata
 app.use(bodyParser.urlencoded({ extended: false }));// urlencoded로 req.body생성
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/')));
 app.use(methodOverride("_method"));
 
-app.use('/', index);
+//app.use('/', index);
 app.use('/users', users);
 mongoose.connect(process.env["MONGO_DB"]);
 var db = mongoose.connection;
@@ -36,7 +36,7 @@ db.once('open', function(){
     console.log("Connected to db server");
 });
 
-app.use("/proj/Proj_view",proj);
+app.use("/",proj);
 
 
 

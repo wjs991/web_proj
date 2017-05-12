@@ -1,0 +1,51 @@
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- /.search form -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+      <li class="header">Select Storage Type</li>
+      <select id="_tblType" class="form-control" role="form">
+        <option value="option1">옵션1</option>
+        <option value="option2">옵션2</option>
+      </select>
+      <li class="active _dashboard">
+        <a href="#" id="_dashboard">
+          <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="active">
+        <a href="/proj/calener">
+          <i class="fa fa-calendar"></i> <span>Calendar</span>
+          <span class="pull-right-container">
+              <small class="label pull-right bg-red">3</small>
+              <small class="label pull-right bg-blue">17</small>
+            </span>
+        </a>
+      </li>
+      <li class="treeview _tables">
+        <a href="#" id="_tables">
+          <i class="fa fa-table"></i> <span>Tables</span>
+          <span class="pull-right-container">
+              <span class="label label-success pull-right _cnt-main-tbl"></span>
+            </span>
+        </a>
+        <ul class="treeview-menu _tbl-list">
+          <!--
+          <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+          <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+          -->
+        </ul>
+      </li>
+      <li>
+        <button type="button" class="list-group-item btn-element" id="_btn-go-create-table" style="width: 100%">Create Table</button>
+      </li>
+      <li class="header">테스트 페아지 이동</li>
+      <li>
+        <input type="text" class="form-control" name="_move-url" id="_move-url" value="" placeholder="페이지 URL 입력">
+        <button type="button" class="list-group-item btn-element" id="_btn-go-import-data" style="width: 100%">Go</button>
+      </li>
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>
