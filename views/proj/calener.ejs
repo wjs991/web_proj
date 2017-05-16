@@ -4,7 +4,7 @@
 <head>
     <% include ../proj/head.ejs%>
 </head>
-<body class="hold-transition skin-blue fixed sidebar-mini">
+<body class="hold-transition skin-blue fixed sidebar-mini sidebar-open">
 
 <!-- Modal Frame -->
 <div class="modal fade" tabindex="-1" role="dialog" id="_modal-row-insert">
@@ -40,13 +40,14 @@
   <% include ../proj/main-sidebar.ejs%>
 
   <!-- =============================================== -->
-
+    <% Proj_menu.forEach(function(Proj_menu) { %>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="min-height: 906px;">
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Calendar
+        <%= Proj_menu.project_name%>일정
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
@@ -339,7 +340,7 @@
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
-
+<%})%>
 
 
 <!-- jQuery 2.2.0 -->

@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
         res.render("index",{Proj_menu:Proj_menu});
     });
 });
-router.get("/proj/calener",function (req,res) {
+router.get("/proj/calener/:id",function (req,res) {
     Proj_menu.find({ _id:req.params.id},function (err, Proj_menu) {
         console.log("1234");
         if (err)return res.json(err);
@@ -30,5 +30,13 @@ router.get('/proj/Proj_view/:id',function (req,res) {
         res.render("proj/Proj_view",{Proj_menu:Proj_menu});
     })
 });
+router.get('/proj/pages/communication/:id',function (req,res) {
+    console.log(req.toString());
+    Proj_menu.find({ _id:req.params.id},function (err, Proj_menu) {
+        console.log("1234");
+        if (err)return res.json(err);
+        res.render("proj/pages/communication",{Proj_menu:Proj_menu});
+    })
+})
 
 module.exports = router;
