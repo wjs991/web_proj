@@ -283,14 +283,14 @@ desired effect
         <li><a href="#"><i class="fa fa-dashboard"></i> home</a></li>
       </ol>
     </section>
-
+      <% Proj_menu.forEach(function(Proj_menu) { %> <!-- 3 -->
     <!-- Main content -->
     <section class="content">
       <div class="container home home-welcome">
         <div class="jumbotron">
-          <h1>유저명</h1>
+          <h1><%= Proj_menu.owner ? Proj_menu.owner.name : "" %></h1>
           <ul>
-              <% Proj_menu.forEach(function(Proj_menu) { %> <!-- 3 -->
+
             <li>
               <a href="/proj/Proj_view/<%= Proj_menu.id %>"> <%= Proj_menu.project_name %></a>
             </li>
@@ -303,6 +303,7 @@ desired effect
       </div>
 
     </section>
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

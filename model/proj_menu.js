@@ -3,11 +3,11 @@
  */
 var express = require('express');
 var mongoose = require('mongoose');
-
+mongoose.Promise=global.Promise;
 var Proj_Schema = mongoose.Schema({
     //db 명세
     project_name:{type:String}, //프로젝트명
-    owner:{type:String},                //주인
+    owner:{type:mongoose.Schema.Types.ObjectId,ref:"Person", required : true},                //주인
     phone:{type:String},
     createdAt:{type:Date, default:Date.now}, // 만들어진 시간
     updatedAt:{type:Date}                     // 업데이트된 시간

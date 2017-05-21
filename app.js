@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var passport = require('passport');
+var flash = require("connect-flash");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -24,10 +27,20 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());//bodyparser 로 stream의 폼 데이터를 req.body에 옮김, jsondata
-app.use(bodyParser.urlencoded({ extended: false }));// urlencoded로 req.body생성
+app.use(bodyParser.urlencoded({ extended: true }));// urlencoded로 req.body생성
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/')));
 app.use(methodOverride("_method"));
+
+app.use(session({
+    saveUninitialized:true,
+    resave:true,
+    secret:'scretsessionkey'
+}));
+require('./config/passport')(passport);
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //app.use('/', index);
 app.use('/users', users);
@@ -39,8 +52,9 @@ db.once('open', function(){
     console.log("Connected to db server");
 });
 
-app.use("/",proj);
 
+app.use("/proj",proj);
+app.use("/",require("./routes/index"));
 var numUsers=0;
 
 app.io.on('connection',function(socket) {
